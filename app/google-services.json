@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "734335959229",
+    "firebase_url": "https://lend-96469.firebaseio.com",
+    "project_id": "lend-96469",
+    "storage_bucket": "lend-96469.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734335959229:android:11d650f831d7070f",
+        "android_client_info": {
+          "package_name": "com.example.cozart.lend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734335959229-vam65n5rpkb89lp8tg6dd54uu56008od.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cozart.lend",
+            "certificate_hash": "d45b7ebaa23e95e514157b349093be967fb5eaa4"
+          }
+        },
+        {
+          "client_id": "734335959229-vluaia1l6rbuesfqd14g6l7o2eg2f80n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS4umjBI12z8fCh_tar8LOXf6MWGXyVCE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734335959229-vluaia1l6rbuesfqd14g6l7o2eg2f80n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
