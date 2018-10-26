@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +7,18 @@
     android:layout_marginBottom="-60dp"
     tools:context=".Views.SignUpActivity">
 
+        <ProgressBar
+            android:id="@+id/signup_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorAccent"
+            android:indeterminateTintMode="src_atop" />
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -27,7 +38,7 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/sign_last_name"
+                android:id="@+id/signup_last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -35,7 +46,7 @@
                 android:hint="Nom" />
 
             <EditText
-                android:id="@+id/sign_first_name"
+                android:id="@+id/signup_first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -58,6 +69,15 @@
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
                 android:hint="mot de passe"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/signup_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:hint="Confirmer votre mot de passe"
                 android:inputType="textPassword" />
 
             <EditText
@@ -109,5 +129,5 @@
                 android:layout_height="wrap_content"
                 android:text="Se connecter" />
         </LinearLayout>
-
 </ScrollView>
+</LinearLayout>
