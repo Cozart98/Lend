@@ -24,6 +24,7 @@ public class TestActivity extends AppCompatActivity {
         String lastName = mySharedPref.getString("lastName", "");
         String firstName = mySharedPref.getString("firstName", "");
         String email = mySharedPref.getString("email", "");
+        String city = mySharedPref.getString("city", "");
 
         if (!isAlreadyUser) {
             Intent i = new Intent(TestActivity.this, SignUpActivity.class);
@@ -35,7 +36,7 @@ public class TestActivity extends AppCompatActivity {
             TextView tvIamnot = findViewById(R.id.textView3);
 
             tvHello.setText(lastName);
-            tvIamnot.setText(firstName + "  " + email);
+            tvIamnot.setText(firstName + "  " + email + city);
 
 
         }

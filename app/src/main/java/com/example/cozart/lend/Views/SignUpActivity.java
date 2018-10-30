@@ -1,6 +1,7 @@
 package com.example.cozart.lend.Views;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -8,10 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.cozart.lend.R;
@@ -36,7 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     private FirebaseAuth mAuth;
-    private ProgressBar mProgressBar;
+    private ProgressDialog mProgDial;
     private SharedPreferences mySharedPref;
 
     @Override
@@ -53,12 +55,15 @@ public class SignUpActivity extends AppCompatActivity {
       final EditText etPassword = findViewById(R.id.signup_password);
       final EditText etConfirmPassword = findViewById(R.id.signup_confirm_password);
       final EditText etPhone = findViewById(R.id.signup_phone);
-      final EditText etCity = findViewById(R.id.signup_city);
-      mProgressBar = findViewById(R.id.signup_progress_bar);
-      mProgressBar.setVisibility(View.GONE);
+      final Spinner spinnerCity = findViewById(R.id.signup_city);
       mEtBirthday = (EditText) findViewById(R.id.signup_birthday);
       mGoToLogin = (Button) findViewById(R.id.go_login);
       Button btnSignup = findViewById(R.id.signup_button);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.city_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCity.setAdapter(adapter);
 
 
       btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
               final String confirmPassword = etConfirmPassword.getText().toString().trim();
               final String birthday = mEtBirthday.getText().toString().trim();
               final String phone = etPhone.getText().toString().trim();
-              final String city = etCity.getText().toString().trim();
+              final String city = spinnerCity.getSelectedItem().toString().trim();
 
               if (lastname.isEmpty()
                       || firstname.isEmpty()
@@ -79,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
                       || password.isEmpty()
                       || birthday.isEmpty()
                       || phone.isEmpty()
-                      || city.isEmpty()){
+                      || city.equals("Sélectionner une ville")){
                   Toast.makeText(SignUpActivity.this,
                           "Vous devez remplir tous les champs pour créer un compte !",
                           Toast.LENGTH_LONG).show();
@@ -132,13 +137,18 @@ public class SignUpActivity extends AppCompatActivity {
                       Toast.makeText(SignUpActivity.this,"Votre mot de passse doit contenir minimum 6 caractère",
                               Toast.LENGTH_LONG).show();
                       return;
-                  }  mProgressBar.setVisibility(View.VISIBLE);
+                  }
+                  mProgDial = new ProgressDialog(SignUpActivity.this);
+                  mProgDial.setIndeterminate(false);
+                  mProgDial.setCancelable(false);
+                  mProgDial.setMessage("veuillez patientez");
+                  mProgDial.show();
                   mAuth.createUserWithEmailAndPassword(email, password)
                           .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                               @Override
                               public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                  mProgressBar.setVisibility(View.GONE);
+                                  mProgDial.dismiss();
 
                                   if (!task.isSuccessful()) {
                                       Toast.makeText(SignUpActivity.this,
@@ -151,7 +161,6 @@ public class SignUpActivity extends AppCompatActivity {
                                       UserModel myUser = new UserModel(lastname, firstname, email, birthday, phone, city);
                                       signupUserInDatabase(myUser);
                                       signUserInSharedPref(myUser);
-                                      // On va sur la page Ma Milos
                                       Intent intent = new Intent(SignUpActivity.this, TestActivity.class);
                                       startActivity(intent);
                                       finish();
@@ -200,7 +209,6 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //  mProgressBar.setVisibility(View.GONE);
     }
 
     public void onBackPressed() {
@@ -220,17 +228,15 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     private void updateLabel() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "dd/MM/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
 
         mEtBirthday.setText(sdf.format(myCalendar.getTime()));
     }
 
     public void signupUserInDatabase(UserModel myUser){
-        //Initialize Firebase components
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersDatabaseReference = database.getReference().child("users");
-        // On enregistre le user en DB et dans les SP
         usersDatabaseReference.push().setValue(myUser);
     }
 

@@ -1,3 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Lend</string>
+
+        <string-array name="city_array">
+            <item>Sélectionner une ville</item>
+            <item>Paris</item>
+            <item>Lyon</item>
+            <item>Marseille</item>
+            <item>Toulouse</item>
+            <item>Bordeaux</item>
+            <item>Lille</item>
+            <item>Nice</item>
+            <item>Nantes</item>
+            <item>Strasbourg</item>
+            <item>Rennes</item>
+        </string-array>
+
 </resources>
