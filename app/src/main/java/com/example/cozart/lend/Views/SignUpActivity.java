@@ -142,7 +142,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                                   if (!task.isSuccessful()) {
                                       Toast.makeText(SignUpActivity.this,
-                                              "Une erreur est survenue l'hors de la création de votre compte",
+                                              "Une erreur est survenue l'hors de la création de votre compte ou l'adresse email est déja utiliser",
                                               Toast.LENGTH_LONG).show();
                                   } else {
                                       Toast.makeText(SignUpActivity.this, "Compte créé avec succès",

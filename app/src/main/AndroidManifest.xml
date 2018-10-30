@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Views.SignUpActivity" />
-        <activity android:name=".Views.ResetPWActivity" />
+        <activity android:name=".Views.ResetPasswordActivity" />
         <activity android:name=".Views.TestActivity"></activity>
     </application>
 
